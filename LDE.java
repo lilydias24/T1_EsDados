@@ -10,6 +10,14 @@ public class LDE<T> {
         this.tamanho = 0;
     }
 
+    public Noh<T> getInicio() {
+        return inicio;
+    }
+
+    public Noh<T> getFim() {
+        return fim;
+    }
+
     public boolean estahVazia() {
         return inicio == null;
     }
@@ -98,6 +106,18 @@ public class LDE<T> {
         Noh<T> p = inicio;
         while (p != null) {
             if (p.getInfo().equals(info)) {
+                return p;
+            }
+            p = p.getProx();
+        }
+        return null;
+    }
+    
+    // Método para buscar com critério personalizado
+    public Noh<T> buscarPersonalizado(T info, java.util.function.BiPredicate<T, T> comparador) {
+        Noh<T> p = inicio;
+        while (p != null) {
+            if (comparador.test(p.getInfo(), info)) {
                 return p;
             }
             p = p.getProx();

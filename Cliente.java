@@ -47,6 +47,14 @@ public class Cliente {
         Cliente outro = (Cliente) obj;
         return cpf.equals(outro.cpf);
     }
+    
+    // Método para comparar apenas por CNH
+    public boolean equalsCNH(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Cliente outro = (Cliente) obj;
+        return cnh.equals(outro.cnh);
+    }
 
     @Override
     public String toString() {

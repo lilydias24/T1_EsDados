@@ -6,6 +6,11 @@ public class CrudCliente {
         this.listaClientes = new LDE<>();
     }
 
+    public Noh<Cliente> buscar(String cnh) {
+        Cliente temp = new Cliente("", cnh, "", "");
+        return listaClientes.buscarPersonalizado(temp, (c1, c2) -> c1.getCNH().equals(c2.getCNH()));
+    }
+
     // Inserção de cliente no final da lista
     public void cadastrarCliente(String nome, String cnh, String telefone, String cpf) {
         Cliente novo = new Cliente(nome, cnh, telefone, cpf);
