@@ -4,6 +4,7 @@ public class Cliente {
     private String cnh;
     private String telefone;
     private String cpf;
+    private static LDE<Cliente> listaClientes = new LDE<>();
 
     public Cliente(String nome, String cnh, String telefone, String cpf) {
         this.nome = nome;
@@ -47,7 +48,7 @@ public class Cliente {
         Cliente outro = (Cliente) obj;
         return cpf.equals(outro.cpf);
     }
-    
+
     // Método para comparar apenas por CNH
     public boolean equalsCNH(Object obj) {
         if (this == obj) return true;
@@ -59,5 +60,72 @@ public class Cliente {
     @Override
     public String toString() {
         return "Nome: " + nome + ", CNH: " + cnh + ", Telefone: " + telefone + ", CPF: " + cpf;
+    }
+
+    public static void cadastrarCliente(String nome, String cnh, String telefone, String cpf) {
+        Cliente novo = new Cliente(nome, cnh, telefone, cpf);
+        if (listaClientes.buscar(novo) != null) {
+            System.out.println("Já existe um cliente com este CPF.");
+            return;
+        }
+        listaClientes.insereFim(novo);
+        System.out.println("Cliente cadastrado com sucesso!");
+    }
+
+    public static void listarClientes(boolean ordemNormal) {
+        if (listaClientes.estahVazia()) {
+            System.out.println("Nenhum cliente cadastrado.");
+            return;
+        }
+
+        System.out.println("==== Lista de Clientes ====");
+        if (ordemNormal) {
+            listaClientes.imprimeInicioFim();
+        } else {
+            listaClientes.imprimeFimInicio();
+        }
+    }
+
+    public static Cliente buscarCliente(String cpf) {
+        Cliente temp = new Cliente("", "", "", cpf);
+        Noh<Cliente> noh = listaClientes.buscar(temp);
+
+        if (noh != null) {
+            return noh.getInfo();
+        }
+        return null;
+    }
+
+    public static void editarCliente(String cpf, String novoNome, String novaCNH, String novoTelefone) {
+        Cliente temp = new Cliente("", "", "", cpf);
+        Noh<Cliente> noh = listaClientes.buscar(temp);
+
+        if (noh == null) {
+            System.out.println("Cliente não encontrado.");
+            return;
+        }
+
+        Cliente c = noh.getInfo();
+        c.setNome(novoNome);
+        c.setCNH(novaCNH);
+        c.setTelefone(novoTelefone);
+
+        System.out.println("Dados do cliente atualizados.");
+    }
+
+    public static void removerCliente(String cpf) {
+        Cliente temp = new Cliente("", "", "", cpf);
+        boolean removido = listaClientes.remove(temp);
+
+        if (removido) {
+            System.out.println("Cliente removido.");
+        } else {
+            System.out.println("Cliente não encontrado.");
+        }
+    }
+
+    public static Noh<Cliente> buscarPorCNH(String cnh) {
+        Cliente temp = new Cliente("", cnh, "", "");
+        return listaClientes.buscarPersonalizado(temp, (c1, c2) -> c1.getCNH().equals(c2.getCNH()));
     }
 }

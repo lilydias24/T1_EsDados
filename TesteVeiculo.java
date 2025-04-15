@@ -1,21 +1,22 @@
 public class TesteVeiculo {
     public static void main(String[] args) {
-        CrudVeiculo crud = new CrudVeiculo();
 
-        Categoria categoria1 = new Categoria("SUV", 1);
-        Categoria categoria2 = new Categoria("Sedan", 2);
+        Categoria.cadastrarCategoria("SUV", 1);
+        Categoria.cadastrarCategoria("Sedan", 2);
+        Categoria.cadastrarCategoria("Hatch", 3);
 
-        crud.cadastrarVeiculo("ABC1234", "Modelo A", "Marca A", 2020, 150, 5, categoria1);
-        crud.cadastrarVeiculo("XYZ5678", "Modelo B", "Marca B", 2021, 200, 4, categoria2);
 
-        crud.listarVeiculos(true);
+        Veiculo.cadastrarVeiculo("ABC1234", "Modelo A", "Marca A", 2020, 150, 5, Categoria.buscarCategoria(1));
+        Veiculo.cadastrarVeiculo("XYZ5678", "Modelo B", "Marca B", 2021, 200, 4, Categoria.buscarCategoria(2));
 
-        crud.editarVeiculo("ABC1234", "Modelo A Atualizado", "Marca A Atualizada", 2022, 160, 6, categoria2);
+        Veiculo.listarVeiculos(true);
 
-        crud.listarVeiculos(false);
+        Veiculo.editarVeiculo("ABC1234", "Modelo A Atualizado", "Marca A Atualizada", 2022, 160, 6, Categoria.buscarCategoria(3));
 
-        crud.removerVeiculo("XYZ5678");
+        Veiculo.listarVeiculos(false);
 
-        crud.listarVeiculos(true);
+        Veiculo.removerVeiculo("XYZ5678");
+
+        Veiculo.listarVeiculos(true);
     }
 }

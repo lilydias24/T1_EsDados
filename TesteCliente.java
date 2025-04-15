@@ -1,19 +1,18 @@
 public class TesteCliente {
 
     public static void main(String[] args) {
-        CrudCliente crud = new CrudCliente();
 
-        crud.cadastrarCliente("João", "123456", "99999-9999", "11111111111");
-        crud.cadastrarCliente("Maria", "654321", "88888-8888", "22222222222");
+        Cliente.cadastrarCliente("João", "123456", "99999-9999", "11111111111");
+        Cliente.cadastrarCliente("Maria", "654321", "88888-8888", "22222222222");
 
-        crud.listarClientes(true);
+        Cliente.listarClientes(true);
 
-        crud.editarCliente("11111111111", "João da Silva", "123456", "99999-0000");
+        Cliente.editarCliente("11111111111", "João da Silva", "123456", "99999-0000");
 
-        crud.listarClientes(false);
+        Cliente.listarClientes(false);
 
-        crud.removerCliente("22222222222");
+        Cliente.removerCliente("22222222222");
 
-        crud.listarClientes(true);
+        Cliente.listarClientes(true);
     }
 }

@@ -5,13 +5,13 @@ import java.util.List;
 
 public class CrudLocacao {
     private LDE<Locacao> locacoes;
-    private CrudVeiculo crudVeiculo;
-    private CrudCliente crudCliente;
+    private Veiculo veiculo;
+    private Cliente cliente;
 
-    public CrudLocacao(CrudVeiculo crudVeiculo, CrudCliente crudCliente) {
+    public CrudLocacao(Veiculo veiculo, Cliente cliente) {
         this.locacoes = new LDE<>();
-        this.crudVeiculo = crudVeiculo;
-        this.crudCliente = crudCliente;
+        this.veiculo = veiculo;
+        this.cliente = cliente;
     }
 
     // metodo para verificar se um veiculo ta disponivel
@@ -25,7 +25,7 @@ public class CrudLocacao {
         List<Veiculo> veiculosDisponiveis = new ArrayList<>();
         
         // pega todos os veiculos
-        LDE<Veiculo> todosVeiculos = crudVeiculo.getVeiculos();
+        LDE<Veiculo> todosVeiculos = veiculo.getVeiculo();
         Noh<Veiculo> atual = todosVeiculos.getInicio();
         
         while (atual != null) {
@@ -54,7 +54,7 @@ public class CrudLocacao {
     // metodo para locar um veiculo
     public boolean locarVeiculo(String cnhCliente, String placaVeiculo, LocalDate dataRetirada, LocalDate dataDevolucao, double valor) {
         // verifica se o cliente existe
-        if (crudCliente.buscar(cnhCliente) == null) {
+        if (Cliente.buscarPorCNH(cnhCliente) == null) {
             System.out.println("Cliente não encontrado!");
             return false;
         }
