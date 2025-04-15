@@ -6,6 +6,10 @@ public class CrudVeiculo {
         this.listaVeiculos = new LDE<>();
     }
 
+    public LDE<Veiculo> getVeiculos() {
+        return listaVeiculos;
+    }
+
     public void cadastrarVeiculo(String placa, String modelo, String marca, int ano, int potencia, int lugares, Categoria categoria) {
         Veiculo novo = new Veiculo(placa, modelo, marca, ano, potencia, lugares, categoria);
 
