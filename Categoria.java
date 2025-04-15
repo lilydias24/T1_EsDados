@@ -29,6 +29,6 @@ public class Categoria {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Categoria outro = (Categoria) obj;
-        return identificador == outro.identificador && nome.equals(outro.nome);
+        return identificador == outro.identificador; 
     }
 }

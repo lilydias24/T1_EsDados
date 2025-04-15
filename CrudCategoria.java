@@ -54,10 +54,10 @@ public class CrudCategoria {
         System.out.println("Categoria editada com sucesso!");
     }
 
-    public void removerCategoria(String nome) {
-        Categoria temp = new Categoria(nome, 0);
+    public void removerCategoria(int identificador) {
+        Categoria temp = new Categoria("", identificador);
         boolean removido = listaCategorias.remove(temp);
-
+        
         if (removido) {
             System.out.println("Categoria removida com sucesso!");
         }
