@@ -1,11 +1,11 @@
 package src.tests;
 import src.model.Categoria;
+import src.utils.ImportaCSV;
 
 public class TesteCategoria {
     public static void main(String[] args) {
 
-        Categoria.cadastrarCategoria("SUV", 1);
-        Categoria.cadastrarCategoria("Sedan", 2);
+        ImportaCSV.importarCategorias();
 
         Categoria.listarCategorias(true);
 
