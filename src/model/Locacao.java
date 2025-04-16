@@ -22,7 +22,7 @@ public class Locacao {
         this.valor = valor;
     }
 
-    // Getters e Setters
+
     public String getCnhCliente() {
         return cnhCliente;
     }
@@ -82,7 +82,7 @@ public class Locacao {
         return placaVeiculo.equals(locacao.placaVeiculo);
     }
 
-    // Métodos estáticos para manipulação de locações
+    // metodos estaticos para manipulação de locações
     public static void cadastrarLocacao(String cnhCliente, String placaVeiculo, LocalDate dataRetirada, LocalDate dataDevolucao, double valor) {
         Cliente cliente = Cliente.buscarPorCNH(cnhCliente).getInfo();
         if (cliente == null) {
