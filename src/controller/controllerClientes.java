@@ -1,12 +1,14 @@
 package src.controller;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import src.model.Cliente;
+import src.utils.Estilo;
 
 public class controllerClientes {
 
-        public static String formatarCPF(String cpf) {
+    public static String formatarCPF(String cpf) {
         try {
             if (cpf == null) return null;
             cpf = cpf.replaceAll("\\D", ""); // remove tudo que não é número
@@ -18,7 +20,7 @@ public class controllerClientes {
                    cpf.substring(6, 9) + "-" +
                    cpf.substring(9);
         } catch (Exception e) {
-            System.out.println("Erro ao formatar CPF: " + e.getMessage());
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Erro ao formatar CPF: " + e.getMessage() + Estilo.reset);
             return null;
         }
     }
@@ -32,7 +34,7 @@ public class controllerClientes {
             }
             return cnh;
         } catch (Exception e) {
-            System.out.println("Erro ao formatar CNH: " + e.getMessage());
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Erro ao formatar CNH: " + e.getMessage() + Estilo.reset);
             return null;
         }
     }
@@ -46,116 +48,119 @@ public class controllerClientes {
             }
             return telefone;
         } catch (Exception e) {
-            System.out.println("Erro ao formatar telefone: " + e.getMessage());
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Erro ao formatar telefone: " + e.getMessage() + Estilo.reset);
             return null;
         }
     }
-    
+
     public static void menuClientes(Scanner scanner) {
         int opcao = -1;
-        do{
-            System.out.println("\n -.-.-.-.-.-.-.-.- MENU CLIENTES -.-.-.-.-.-.-.-.- \n");
-            System.out.println("\t 1. Inserir cliente");
-            System.out.println("\t 2. Excluir cliente");
-            System.out.println("\t 3. Editar cliente");
-            System.out.println("\t 4. Listar clientes (início -> fim)");
-            System.out.println("\t 5. Listar clientes (fim -> início)");
-            System.out.println("\t 0. <- Voltar");
-            System.out.println("\n -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.- \n");
-            System.out.print(">> Escolha uma das opções acima : ");
+        do {
+            System.out.println(Estilo.negrito + Estilo.azul + "\n<<<----------- MENU CLIENTES ---------->>>\n" + Estilo.reset);
+            System.out.println(Estilo.roxo + "\t 1. Inserir Cliente");
+            System.out.println("\t 2. Excluir Cliente");
+            System.out.println("\t 3. Editar Cliente");
+            System.out.println("\t 4. Listar Clientes (Início -> Fim)");
+            System.out.println("\t 5. Listar Clientes (Fim -> Início)");
+            System.out.println("\t 0. <- Voltar" + Estilo.reset);
+            System.out.println(Estilo.negrito + Estilo.azul + "\n<<<------------------------------------>>>\n" + Estilo.reset);
+            System.out.print(Estilo.negrito + Estilo.amarelo + ">> Escolha uma das opções acima: " + Estilo.reset);
+
             try {
                 opcao = scanner.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida! Digite apenas números.");
+                System.out.println(Estilo.negrito + Estilo.vermelho + "Entrada inválida! Digite apenas números." + Estilo.reset);
                 scanner.nextLine();
                 continue;
-            }            
+            }
             scanner.nextLine();
 
             switch (opcao) {
                 case 1:
-                    System.out.print("\nNome: ");
+                    System.out.print(Estilo.negrito + Estilo.amarelo + "\nNome: " + Estilo.reset);
                     String nome = scanner.nextLine();
-                
-                    System.out.print("CNH: ");
+
+                    System.out.print(Estilo.negrito + Estilo.amarelo + "CNH: " + Estilo.reset);
                     String cnhEntrada = scanner.nextLine();
                     String cnh = formatarCNH(cnhEntrada);
                     if (cnh == null) {
-                        System.out.println("CNH inválida. Cancelando cadastro.");
-                        break;
-                    }
-                
-                    System.out.print("Telefone: ");
-                    String telefoneEntrada = scanner.nextLine();
-                    String telefone = formatarTelefone(telefoneEntrada);
-                    if (telefone == null) {
-                        System.out.println("Telefone inválido. Cancelando cadastro.");
+                        System.out.println(Estilo.negrito + Estilo.vermelho + "CNH inválida. Cancelando cadastro." + Estilo.reset);
                         break;
                     }
 
-                    System.out.print("CPF (somente números): ");
+                    System.out.print(Estilo.negrito + Estilo.amarelo + "Telefone: " + Estilo.reset);
+                    String telefoneEntrada = scanner.nextLine();
+                    String telefone = formatarTelefone(telefoneEntrada);
+                    if (telefone == null) {
+                        System.out.println(Estilo.negrito + Estilo.vermelho + "Telefone inválido. Cancelando cadastro." + Estilo.reset);
+                        break;
+                    }
+
+                    System.out.print(Estilo.negrito + Estilo.amarelo + "CPF (somente números): " + Estilo.reset);
                     String cpfEntrada = scanner.nextLine();
                     String cpf = formatarCPF(cpfEntrada);
                     if (cpf == null) {
-                        System.out.println("Não foi possível cadastrar o cliente. CPF inválido.");
+                        System.out.println(Estilo.negrito + Estilo.vermelho + "CPF inválido. Cancelando cadastro." + Estilo.reset);
                         break;
                     }
-                
+
                     Cliente.cadastrarCliente(nome, cnh, telefone, cpf);
-                
+                    System.out.println(Estilo.negrito + Estilo.verde + "Cliente cadastrado com sucesso!" + Estilo.reset);
                     break;
                 case 2:
-                    System.out.print("\nCPF do cliente a remover: ");
+                    System.out.print(Estilo.negrito + Estilo.amarelo + "\nCPF do cliente a remover: " + Estilo.reset);
                     String cpfRemoverEntrada = scanner.nextLine();
                     String cpfRemover = formatarCPF(cpfRemoverEntrada);
                     if (cpfRemover == null) {
-                        System.out.println("CPF inválido. Cancelando remoção.");
+                        System.out.println(Estilo.negrito + Estilo.vermelho + "CPF inválido. Cancelando remoção." + Estilo.reset);
                         break;
                     }
                     Cliente.removerCliente(cpfRemover);
                     break;
                 case 3:
-                    System.out.print("\nCPF do cliente a editar: ");
+                    System.out.print(Estilo.negrito + Estilo.amarelo + "\nCPF do cliente a editar: " + Estilo.reset);
                     String cpfEditarEntrada = scanner.nextLine();
                     String cpfEditar = formatarCPF(cpfEditarEntrada);
                     if (cpfEditar == null) {
-                        System.out.println("CPF inválido. Cancelando edição.");
+                        System.out.println(Estilo.negrito + Estilo.vermelho + "CPF inválido. Cancelando edição." + Estilo.reset);
                         break;
                     }
-                
-                    System.out.print("Novo nome: ");
+
+                    System.out.print(Estilo.negrito + Estilo.amarelo + "Novo nome: " + Estilo.reset);
                     String nomeNovo = scanner.nextLine();
-                
-                    System.out.print("Nova CNH: ");
+
+                    System.out.print(Estilo.negrito + Estilo.amarelo + "Nova CNH: " + Estilo.reset);
                     String cnhNovaEntrada = scanner.nextLine();
                     String cnhNova = formatarCNH(cnhNovaEntrada);
                     if (cnhNova == null) {
-                        System.out.println("CNH inválida. Cancelando cadastro.");
+                        System.out.println(Estilo.negrito + Estilo.vermelho + "CNH inválida. Cancelando edição." + Estilo.reset);
                         break;
                     }
-                
-                    System.out.print("Novo telefone: ");
+
+                    System.out.print(Estilo.negrito + Estilo.amarelo + "Novo telefone: " + Estilo.reset);
                     String telefoneNovoEntrada = scanner.nextLine();
                     String telefoneNovo = formatarTelefone(telefoneNovoEntrada);
                     if (telefoneNovo == null) {
-                        System.out.println("Telefone inválido. Cancelando cadastro.");
+                        System.out.println(Estilo.negrito + Estilo.vermelho + "Telefone inválido. Cancelando edição." + Estilo.reset);
                         break;
-                    }                    
+                    }
                     Cliente.editarCliente(cpfEditar, nomeNovo, cnhNova, telefoneNovo);
+                    System.out.println(Estilo.negrito + Estilo.verde + "Cliente editado com sucesso!" + Estilo.reset);
                     break;
                 case 4:
+                    System.out.println(Estilo.negrito + Estilo.azul + "\n=== Listando Clientes (Início -> Fim) ===" + Estilo.reset);
                     Cliente.listarClientes(true);
                     break;
                 case 5:
+                    System.out.println(Estilo.negrito + Estilo.azul + "\n=== Listando Clientes (Fim -> Início) ===" + Estilo.reset);
                     Cliente.listarClientes(false);
                     break;
                 case 0:
+                    System.out.println(Estilo.negrito + Estilo.branco + "\nVoltando ao menu principal..." + Estilo.reset);
                     break;
                 default:
-                    System.out.println("\nOpção inválida! ");
+                    System.out.println(Estilo.negrito + Estilo.vermelho + "Opção inválida!" + Estilo.reset);
             }
         } while (opcao != 0);
     }
 }
-    
-
