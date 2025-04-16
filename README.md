@@ -13,7 +13,7 @@ Implementar as operações para cada entidade:
 Clientes: incluir, excluir, editar, listar (ambos sentidos) ✅
 Veículos: incluir, excluir editar listar (ambos sentidos) ✅
 Categorias: incluir, excluir, editar, listar ✅
-Locações: locar, devolver, listar ativas ❌
+Locações: locar, devolver, listar ativas ✅
 
 3. Funcionalidades Avançadas
 Implementar o menu principal e submenus ✅
