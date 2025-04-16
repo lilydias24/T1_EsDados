@@ -1,3 +1,4 @@
+package src.estrutura;
 public class LDE<T> {
 
     private Noh<T> inicio;

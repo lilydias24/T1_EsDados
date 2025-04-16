@@ -1,3 +1,7 @@
+package src.tests;
+import src.model.Categoria;
+import src.model.Veiculo;
+
 public class TesteVeiculo {
     public static void main(String[] args) {
 

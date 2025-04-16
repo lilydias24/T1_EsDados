@@ -1,3 +1,10 @@
+package src;
+
+import src.model.Categoria;
+import src.model.Cliente;
+import src.model.Veiculo;
+import src.utils.Estilo;
+
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.InputMismatchException;

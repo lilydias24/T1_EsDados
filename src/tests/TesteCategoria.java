@@ -1,3 +1,6 @@
+package src.tests;
+import src.model.Categoria;
+
 public class TesteCategoria {
     public static void main(String[] args) {
 

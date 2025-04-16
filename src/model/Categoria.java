@@ -1,3 +1,7 @@
+package src.model;
+import src.estrutura.LDE;
+import src.estrutura.Noh;
+
 public class Categoria {
     private String nome;
     private int identificador;

@@ -1,3 +1,4 @@
+package src.estrutura;
 public class Noh<T> {
 
     private T info;
