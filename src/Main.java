@@ -2,6 +2,8 @@ package src;
 
 import src.controller.*;
 import src.utils.Estilo;
+import src.utils.ImportaCSV;
+
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
@@ -9,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
-
+        ImportaCSV.importarDados();
         do {
             System.out.println(Estilo.negrito + Estilo.azul + "\n<<<----------- LOCADORA DE VEÍCULOS ---------->> \n" + Estilo.reset);
             System.out.println(Estilo.roxo + "\t 1. Gerenciar Clientes");

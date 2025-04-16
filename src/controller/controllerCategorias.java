@@ -2,10 +2,10 @@ package src.controller;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import src.model.Categoria;
 
 public class controllerCategorias {
+
     public static void menuCategorias(Scanner scanner) {
         int opcao = -1;
         do {

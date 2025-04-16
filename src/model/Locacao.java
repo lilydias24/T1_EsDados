@@ -83,14 +83,13 @@ public class Locacao {
 
     // Métodos estáticos para manipulação de locações
     public static void cadastrarLocacao(String cnhCliente, String placaVeiculo, LocalDate dataRetirada, LocalDate dataDevolucao, double valor) {
-        Cliente cliente = Cliente.buscarPorCNH(cnhCliente).getInfo();
-        if (cliente == null) {
+        
+        if (Cliente.buscarPorCNH(cnhCliente) == null) {
             System.out.println("Cliente não encontrado!");
             return;
         }
-
-        Veiculo veiculo = Veiculo.buscarVeiculo(placaVeiculo);
-        if (veiculo == null) {
+        
+        if (Veiculo.buscarVeiculo(placaVeiculo) == null) {
             System.out.println("Veículo não encontrado!");
             return;
         }

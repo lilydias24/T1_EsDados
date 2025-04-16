@@ -1,12 +1,13 @@
 package src.controller;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import src.model.Categoria;
 import src.model.Veiculo;
 
 public class controllerVeiculos {
 
+    
     public static void menuVeiculos(Scanner scanner) {
         int opcao = -1;
         do {

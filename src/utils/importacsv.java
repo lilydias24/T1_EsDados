@@ -27,7 +27,6 @@ public class ImportaCSV {
                     Categoria.cadastrarCategoria(nome, identificador);
                 }
             }
-            System.out.println("Categorias importadas com sucesso!");
         } catch (IOException e) {
             System.out.println("Erro ao ler o arquivo de categorias: " + e.getMessage());
         } catch (NumberFormatException e) {
@@ -59,7 +58,6 @@ public class ImportaCSV {
                     }
                 }
             }
-            System.out.println("Veículos importados com sucesso!");
         } catch (IOException e) {
             System.out.println("Erro ao ler o arquivo de veículos: " + e.getMessage());
         } catch (NumberFormatException e) {

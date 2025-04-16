@@ -9,7 +9,7 @@ public class TesteCategoria {
 
         Categoria.listarCategorias(true);
 
-        Categoria.editarCategoria(1, "SUV Atualizado");
+        Categoria.editarCategoria(1014, "SUV Atualizado");
 
         Categoria.listarCategorias(false);
 

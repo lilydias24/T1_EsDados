@@ -3,6 +3,7 @@ package src.controller;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import src.model.*;
 
 public class controllerLocacoes {
     public static void menuLocacoes(Scanner scanner) {
@@ -28,6 +29,7 @@ public class controllerLocacoes {
                 case 1:
                     System.out.print("\nCNH do cliente: ");
                     String cnh = scanner.nextLine();
+                    Veiculo.listarVeiculos(true);
                     System.out.print("Placa do veículo: ");
                     String placa = scanner.nextLine();
                     System.out.print("Data de retirada (AAAA-MM-DD): ");
@@ -37,15 +39,15 @@ public class controllerLocacoes {
                     System.out.print("Valor: ");
                     double valor = scanner.nextDouble();
                     scanner.nextLine();
-                    //Locacao.locarVeiculo(cnh, placa, retirada, devolucao, valor);
+                    Locacao.cadastrarLocacao(cnh, placa, retirada, devolucao, valor);
                     break;
                 case 2:
                     System.out.print("\nPlaca do veículo para devolução: ");
                     String placaDevolver = scanner.nextLine();
-                    //Locacao.devolverVeiculo(placaDevolver);
+                    Locacao.devolverVeiculo(placaDevolver);
                     break;
                 case 3:
-                    //Locacao.listarLocacoesAtivas();
+                    Locacao.listarLocacoes(true);
                     break;
                 case 0:
                     break;
