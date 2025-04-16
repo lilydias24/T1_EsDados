@@ -1,5 +1,13 @@
+package src.tests;
 import java.time.LocalDate;
 import java.util.List;
+
+import src.model.Categoria;
+import src.model.Cliente;
+import src.controller.CrudLocacao;
+import src.model.Locacao;
+import src.model.Veiculo;
+import src.estrutura.LDE;
 
 public class TesteLocacao {
     public static void main(String[] args) {
@@ -9,26 +17,19 @@ public class TesteLocacao {
         CrudLocacao crudLocacao = new CrudLocacao(veiculos, clientes);
         
         // instan categorias
-        Categoria categoria1 = new Categoria("Sedan", 1);
-        Categoria categoria2 = new Categoria("SUV", 2);
+        Categoria.cadastrarCategoria("Sedan", 1);
+        Categoria.cadastrarCategoria("SUV", 2);
         
         // instan veiculos
         System.out.println("\n=== Cadastrando Veículos ===");
-        Veiculo veiculo1 = new Veiculo("ABC1234", "Civic", "Honda", 2020, 150, 5, categoria1);
-        Veiculo veiculo2 = new Veiculo("DEF5678", "CR-V", "Honda", 2021, 180, 5, categoria2);
-        Veiculo veiculo3 = new Veiculo("GHI9012", "Fit", "Honda", 2019, 120, 5, categoria1);
-        
-        veiculos.insereFim(veiculo1);
-        veiculos.insereFim(veiculo2);
-        veiculos.insereFim(veiculo3);
+        Veiculo.cadastrarVeiculo("ABC1234", "Civic", "Honda", 2020, 150, 5, Categoria.buscarCategoria(1));
+        Veiculo.cadastrarVeiculo("DEF5678", "CR-V", "Honda", 2021, 180, 5, Categoria.buscarCategoria(2));
+        Veiculo.cadastrarVeiculo("GHI9012", "Fit", "Honda", 2019, 120, 5, Categoria.buscarCategoria(1));
         
         // instan clientes
         System.out.println("\n=== Cadastrando Clientes ===");
-        Cliente cliente1 = new Cliente("João Silva", "123456", "11999999999", "123.456.789-00");
-        Cliente cliente2 = new Cliente("Maria Oliveira", "654321", "11988888888", "987.654.321-00");
-        
-        clientes.insereFim(cliente1);
-        clientes.insereFim(cliente2);
+        Cliente.cadastrarCliente("João Silva", "123456", "11999999999", "123.456.789-00");
+        Cliente.cadastrarCliente("Maria Oliveira", "654321", "11988888888", "987.654.321-00");
         
         // teste listagem de veiculos disponiveis
         System.out.println("\n=== Listando Veículos Disponíveis (Inicial) ===");
