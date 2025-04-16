@@ -1,5 +1,9 @@
 package src.model;
+
 import java.time.LocalDate;
+
+import src.estrutura.LDE;
+import src.estrutura.Noh;
 
 public class Locacao {
     private String cnhCliente;
@@ -7,6 +11,8 @@ public class Locacao {
     private LocalDate dataRetirada;
     private LocalDate dataDevolucao;
     private double valor;
+
+    private static LDE<Locacao> listaLocacoes = new LDE<>();
 
     public Locacao(String cnhCliente, String placaVeiculo, LocalDate dataRetirada, LocalDate dataDevolucao, double valor) {
         this.cnhCliente = cnhCliente;
@@ -75,4 +81,68 @@ public class Locacao {
         Locacao locacao = (Locacao) obj;
         return placaVeiculo.equals(locacao.placaVeiculo);
     }
-} 
+
+    // Métodos estáticos para manipulação de locações
+    public static void cadastrarLocacao(String cnhCliente, String placaVeiculo, LocalDate dataRetirada, LocalDate dataDevolucao, double valor) {
+        Cliente cliente = Cliente.buscarPorCNH(cnhCliente).getInfo();
+        if (cliente == null) {
+            System.out.println("Cliente não encontrado!");
+            return;
+        }
+
+        Veiculo veiculo = Veiculo.buscarVeiculo(placaVeiculo);
+        if (veiculo == null) {
+            System.out.println("Veículo não encontrado!");
+            return;
+        }
+
+        if (!veiculoDisponivel(placaVeiculo)) {
+            System.out.println("Veículo já está locado!");
+            return;
+        }
+
+        Locacao novaLocacao = new Locacao(cnhCliente, placaVeiculo, dataRetirada, dataDevolucao, valor);
+        listaLocacoes.insereFim(novaLocacao);
+        System.out.println("Locação cadastrada com sucesso!");
+    }
+
+    public static void listarLocacoes(boolean ordemNormal) {
+        if (listaLocacoes.estahVazia()) {
+            System.out.println("Nenhuma locação cadastrada.");
+            return;
+        }
+
+        System.out.println("==== Lista de Locações ====");
+        if (ordemNormal) {
+            listaLocacoes.imprimeInicioFim();
+        } else {
+            listaLocacoes.imprimeFimInicio();
+        }
+    }
+
+    public static boolean veiculoDisponivel(String placaVeiculo) {
+        Locacao temp = new Locacao(null, placaVeiculo, null, null, 0);
+        return listaLocacoes.buscar(temp) == null;
+    }
+
+    public static void devolverVeiculo(String placaVeiculo) {
+        Locacao temp = new Locacao(null, placaVeiculo, null, null, 0);
+        boolean removido = listaLocacoes.remove(temp);
+
+        if (removido) {
+            System.out.println("Veículo devolvido com sucesso!");
+        } else {
+            System.out.println("Locação não encontrada.");
+        }
+    }
+
+    public static Locacao buscarLocacao(String placaVeiculo) {
+        Locacao temp = new Locacao(null, placaVeiculo, null, null, 0);
+        Noh<Locacao> noh = listaLocacoes.buscar(temp);
+
+        if (noh != null) {
+            return noh.getInfo();
+        }
+        return null;
+    }
+}
