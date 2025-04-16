@@ -1,13 +1,8 @@
 package src;
 
 import src.controller.*;
-import src.model.Categoria;
-import src.model.Cliente;
-import src.model.Veiculo;
 import src.utils.Estilo;
-
 import java.util.Scanner;
-import java.time.LocalDate;
 import java.util.InputMismatchException;
 
 public class Main {
