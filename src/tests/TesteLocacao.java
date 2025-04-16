@@ -1,13 +1,10 @@
 package src.tests;
 import java.time.LocalDate;
-import java.util.List;
-
+import src.controller.CrudLocacao;
+import src.estrutura.LDE;
 import src.model.Categoria;
 import src.model.Cliente;
-import src.controller.CrudLocacao;
-import src.model.Locacao;
 import src.model.Veiculo;
-import src.estrutura.LDE;
 
 public class TesteLocacao {
     public static void main(String[] args) {
@@ -33,12 +30,10 @@ public class TesteLocacao {
         
         // teste listagem de veiculos disponiveis
         System.out.println("\n=== Listando Veículos Disponíveis (Inicial) ===");
-        List<Veiculo> veiculosDisponiveis = crudLocacao.listarVeiculosDisponiveis(null, null, null, true);
+        LDE<Veiculo> veiculosDisponiveis = crudLocacao.listarVeiculosDisponiveis(null, null, null, true);
         System.out.println("Veículos disponíveis (ordenados por potência crescente):");
-        for (Veiculo v : veiculosDisponiveis) {
-            System.out.println(v);
-        }
-        System.out.println("Total de veículos disponíveis: " + veiculosDisponiveis.size());
+        veiculosDisponiveis.imprimeInicioFim();
+        System.out.println("Total de veículos disponíveis: " + veiculosDisponiveis.tamanho());
         
         // testando locação de veículos
         System.out.println("\n=== Testando Locação de Veículos ===");
@@ -66,12 +61,10 @@ public class TesteLocacao {
         
         // aqui, lista os veiculos disponiveis apos as locações
         System.out.println("\n=== Listando Veículos Disponíveis (Após Locações) ===");
-        List<Veiculo> veiculosDisponiveisApos = crudLocacao.listarVeiculosDisponiveis(null, null, null, true);
+        LDE<Veiculo> veiculosDisponiveisApos = crudLocacao.listarVeiculosDisponiveis(null, null, null, true);
         System.out.println("Veículos disponíveis (ordenados por potência crescente):");
-        for (Veiculo v : veiculosDisponiveisApos) {
-            System.out.println(v);
-        }
-        System.out.println("Total de veículos disponíveis: " + veiculosDisponiveisApos.size());
+        veiculosDisponiveisApos.imprimeInicioFim();
+        System.out.println("Total de veículos disponíveis: " + veiculosDisponiveisApos.tamanho());
         
         // aqui, tenta locar um veiculo ja locado (deve falhar)
         System.out.println("\nTentando locar um veículo já locado (deve falhar):");
@@ -89,11 +82,9 @@ public class TesteLocacao {
         
         // aqui, lista os veiculos disponiveis apos a devolucao
         System.out.println("\n=== Listando Veículos Disponíveis (Após Devolução) ===");
-        List<Veiculo> veiculosDisponiveisAposDevolucao = crudLocacao.listarVeiculosDisponiveis(null, null, null, true);
+        LDE<Veiculo> veiculosDisponiveisAposDevolucao = crudLocacao.listarVeiculosDisponiveis(null, null, null, true);
         System.out.println("Veículos disponíveis (ordenados por potência crescente):");
-        for (Veiculo v : veiculosDisponiveisAposDevolucao) {
-            System.out.println(v);
-        }
-        System.out.println("Total de veículos disponíveis: " + veiculosDisponiveisAposDevolucao.size());
+        veiculosDisponiveisAposDevolucao.imprimeInicioFim();
+        System.out.println("Total de veículos disponíveis: " + veiculosDisponiveisAposDevolucao.tamanho());
     }
 } 

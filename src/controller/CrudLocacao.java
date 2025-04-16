@@ -1,9 +1,5 @@
 package src.controller;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
 import src.estrutura.LDE;
 import src.estrutura.Noh;
 import src.model.Cliente;
@@ -12,13 +8,9 @@ import src.model.Veiculo;
 
 public class CrudLocacao {
     private LDE<Locacao> locacoes;
-    private LDE<Veiculo> veiculos;
-    private LDE<Cliente> clientes;
 
     public CrudLocacao(LDE<Veiculo> veiculos, LDE<Cliente> clientes) {
         this.locacoes = new LDE<>();
-        this.veiculos = veiculos;
-        this.clientes = clientes;
     }
 
     // metodo para verificar se um veiculo ta disponivel
@@ -28,11 +20,11 @@ public class CrudLocacao {
     }
 
     // metodo para listar veiculos disponiveis com filtros
-    public List<Veiculo> listarVeiculosDisponiveis(Integer potenciaMinima, Integer lugares, String categoriaNome, boolean ordemCrescente) {
-        List<Veiculo> veiculosDisponiveis = new ArrayList<>();
+    public LDE<Veiculo> listarVeiculosDisponiveis(Integer potenciaMinima, Integer lugares, String categoriaNome, boolean ordemCrescente) {
+        LDE<Veiculo> veiculosDisponiveis = new LDE<>();
         
         // pega todos os veiculos
-        Noh<Veiculo> atual = veiculos.getInicio();
+        Noh<Veiculo> atual = Veiculo.getListaVeiculos().getInicio();
         
         while (atual != null) {
             Veiculo veiculo = atual.getInfo();
@@ -41,17 +33,42 @@ public class CrudLocacao {
                 if ((potenciaMinima == null || veiculo.getPotencia() >= potenciaMinima) &&
                     (lugares == null || veiculo.getLugares() == lugares) &&
                     (categoriaNome == null || veiculo.getCategoria().getNome().equals(categoriaNome))) {
-                    veiculosDisponiveis.add(veiculo);
+                    
+                    // Insere o veículo na posição correta para manter a ordenação
+                    if (veiculosDisponiveis.estahVazia()) {
+                        veiculosDisponiveis.insereFim(veiculo);
+                    } else {
+                        Noh<Veiculo> nohAtual = veiculosDisponiveis.getInicio();
+                        boolean inserido = false;
+                        
+                        while (nohAtual != null && !inserido) {
+                            Veiculo veiculoAtual = nohAtual.getInfo();
+                            boolean deveInserirAntes = ordemCrescente ? 
+                                veiculo.getPotencia() < veiculoAtual.getPotencia() :
+                                veiculo.getPotencia() > veiculoAtual.getPotencia();
+                            
+                            if (deveInserirAntes) {
+                                if (nohAtual == veiculosDisponiveis.getInicio()) {
+                                    veiculosDisponiveis.insereInicio(veiculo);
+                                } else {
+                                    Noh<Veiculo> novo = new Noh<>(veiculo);
+                                    novo.setProx(nohAtual);
+                                    novo.setAnt(nohAtual.getAnt());
+                                    nohAtual.getAnt().setProx(novo);
+                                    nohAtual.setAnt(novo);
+                                }
+                                inserido = true;
+                            }
+                            nohAtual = nohAtual.getProx();
+                        }
+                        
+                        if (!inserido) {
+                            veiculosDisponiveis.insereFim(veiculo);
+                        }
+                    }
                 }
             }
             atual = atual.getProx();
-        }
-
-        // ordena os veiculos
-        if (ordemCrescente) {
-            veiculosDisponiveis.sort(Comparator.comparing(Veiculo::getPotencia));
-        } else {
-            veiculosDisponiveis.sort(Comparator.comparing(Veiculo::getPotencia).reversed());
         }
 
         return veiculosDisponiveis;
@@ -102,13 +119,8 @@ public class CrudLocacao {
     
     // metodo para buscar cliente por CNH
     private Cliente buscarClientePorCNH(String cnh) {
-        Noh<Cliente> atual = clientes.getInicio();
-        while (atual != null) {
-            if (atual.getInfo().getCNH().equals(cnh)) {
-                return atual.getInfo();
-            }
-            atual = atual.getProx();
-        }
-        return null;
+        Cliente temp = new Cliente("", cnh, "", "");
+        Noh<Cliente> noh = Cliente.buscarPorCNH(cnh);
+        return noh != null ? noh.getInfo() : null;
     }
 } 

@@ -156,4 +156,8 @@ public class Veiculo {
             System.out.println("Veículo não encontrado.");
         }
     }
+
+    public static LDE<Veiculo> getListaVeiculos() {
+        return listaVeiculos;
+    }
 }
