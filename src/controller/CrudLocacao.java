@@ -12,13 +12,13 @@ import src.model.Veiculo;
 
 public class CrudLocacao {
     private LDE<Locacao> locacoes;
-    private Veiculo veiculo;
-    private Cliente cliente;
+    private LDE<Veiculo> veiculos;
+    private LDE<Cliente> clientes;
 
-    public CrudLocacao(Veiculo veiculo, Cliente cliente) {
+    public CrudLocacao(LDE<Veiculo> veiculos, LDE<Cliente> clientes) {
         this.locacoes = new LDE<>();
-        this.veiculo = veiculo;
-        this.cliente = cliente;
+        this.veiculos = veiculos;
+        this.clientes = clientes;
     }
 
     // metodo para verificar se um veiculo ta disponivel
@@ -32,8 +32,7 @@ public class CrudLocacao {
         List<Veiculo> veiculosDisponiveis = new ArrayList<>();
         
         // pega todos os veiculos
-        LDE<Veiculo> todosVeiculos = veiculo.getVeiculo();
-        Noh<Veiculo> atual = todosVeiculos.getInicio();
+        Noh<Veiculo> atual = veiculos.getInicio();
         
         while (atual != null) {
             Veiculo veiculo = atual.getInfo();
@@ -61,7 +60,8 @@ public class CrudLocacao {
     // metodo para locar um veiculo
     public boolean locarVeiculo(String cnhCliente, String placaVeiculo, LocalDate dataRetirada, LocalDate dataDevolucao, double valor) {
         // verifica se o cliente existe
-        if (Cliente.buscarPorCNH(cnhCliente) == null) {
+        Cliente cliente = buscarClientePorCNH(cnhCliente);
+        if (cliente == null) {
             System.out.println("Cliente não encontrado!");
             return false;
         }
@@ -98,5 +98,17 @@ public class CrudLocacao {
     // metodo para obter todas as locacoes
     public LDE<Locacao> getLocacoes() {
         return locacoes;
+    }
+    
+    // metodo para buscar cliente por CNH
+    private Cliente buscarClientePorCNH(String cnh) {
+        Noh<Cliente> atual = clientes.getInicio();
+        while (atual != null) {
+            if (atual.getInfo().getCNH().equals(cnh)) {
+                return atual.getInfo();
+            }
+            atual = atual.getProx();
+        }
+        return null;
     }
 } 
