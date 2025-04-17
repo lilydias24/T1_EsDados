@@ -114,7 +114,6 @@ public class LDE<T> {
         return null;
     }
     
-    // Método para buscar com critério personalizado
     public Noh<T> buscarPersonalizado(T info, java.util.function.BiPredicate<T, T> comparador) {
         Noh<T> p = inicio;
         while (p != null) {

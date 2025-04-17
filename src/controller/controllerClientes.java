@@ -11,7 +11,7 @@ public class controllerClientes {
     public static String formatarCPF(String cpf) {
         try {
             if (cpf == null) return null;
-            cpf = cpf.replaceAll("\\D", ""); // remove tudo que não é número
+            cpf = cpf.replaceAll("\\D", ""); 
             if (cpf.length() != 11) {
                 throw new IllegalArgumentException("CPF inválido! Deve conter 11 dígitos.");
             }
