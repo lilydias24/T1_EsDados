@@ -12,7 +12,7 @@ public class Locacao {
     private LocalDate dataDevolucao;
     private double valor;
 
-    private static LDE<Locacao> listaLocacoes = new LDE<>();
+    static LDE<Locacao> listaLocacoes = new LDE<>();
 
     public Locacao(String cnhCliente, String placaVeiculo, LocalDate dataRetirada, LocalDate dataDevolucao, double valor) {
         this.cnhCliente = cnhCliente;

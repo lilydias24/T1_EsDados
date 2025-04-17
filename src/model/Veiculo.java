@@ -147,11 +147,20 @@ public class Veiculo {
     }
 
     public static void removerVeiculo(String placa) {
+        // Verifica se há locações associadas ao veículo
+        for (Noh<Locacao> noh = Locacao.listaLocacoes.getInicio(); noh != null; noh = noh.getProx()) {
+            if (noh.getInfo().getPlacaVeiculo().equals(placa)) {
+                System.out.println("Não é possível remover o veículo. Existem locações associadas a ele.");
+                return;
+            }
+        }
+    
+        // Remove o veículo se não houver locações associadas
         Veiculo temp = new Veiculo(placa, "", "", 0, 0, 0, null);
         boolean removido = listaVeiculos.remove(temp);
-
+    
         if (removido) {
-            System.out.println("Veículo removido.");
+            System.out.println("Veículo removido com sucesso!");
         } else {
             System.out.println("Veículo não encontrado.");
         }

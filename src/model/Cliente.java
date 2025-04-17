@@ -118,13 +118,32 @@ public class Cliente {
     }
 
     public static void removerCliente(String cpf) {
+        // Busca o cliente pelo CPF
         Cliente temp = new Cliente("", "", "", cpf);
-        boolean removido = listaClientes.remove(temp);
-
-        if (removido) {
-            System.out.println("Cliente removido.");
-        } else {
+        Noh<Cliente> nohCliente = listaClientes.buscar(temp);
+    
+        if (nohCliente == null) {
             System.out.println("Cliente não encontrado.");
+            return;
+        }
+    
+        Cliente cliente = nohCliente.getInfo();
+    
+        // Verifica se há locações associadas ao cliente
+        for (Noh<Locacao> noh = Locacao.listaLocacoes.getInicio(); noh != null; noh = noh.getProx()) {
+            if (noh.getInfo().getCnhCliente().equals(cliente.getCNH())) {
+                System.out.println("Não é possível remover o cliente. Existem locações associadas a ele.");
+                return;
+            }
+        }
+    
+        // Remove o cliente se não houver locações associadas
+        boolean removido = listaClientes.remove(temp);
+    
+        if (removido) {
+            System.out.println("Cliente removido com sucesso!");
+        } else {
+            System.out.println("Erro ao remover o cliente.");
         }
     }
 
