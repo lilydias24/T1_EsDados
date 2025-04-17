@@ -190,7 +190,7 @@ public class Veiculo {
         }
     
         if (!encontrou) {
-            System.out.println("Nenhum veículo encontrado com os critérios especificados.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Nenhum veículo encontrado com os critérios especificados." + Estilo.reset);
         }
     }
 
