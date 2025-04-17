@@ -99,6 +99,16 @@ public class Locacao {
             return;
         }
 
+        if (dataRetirada.isAfter(dataDevolucao)) {
+            System.out.println("A data de retirada não pode ser posterior à data de devolução.");
+            return;
+        }
+    
+        if (valor < 0) {
+            System.out.println("O valor da locação não pode ser negativo.");
+            return;
+        }
+        
         Locacao novaLocacao = new Locacao(cnhCliente, placaVeiculo, dataRetirada, dataDevolucao, valor);
         listaLocacoes.insereFim(novaLocacao);
         System.out.println("Locação cadastrada com sucesso!");

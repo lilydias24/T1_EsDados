@@ -1,6 +1,7 @@
 package src.controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import src.model.*;
@@ -29,20 +30,27 @@ public class controllerLocacoes {
 
             switch (opcao) {
                 case 1:
-                    System.out.print(Estilo.negrito + Estilo.amarelo + "\nCNH do cliente: " + Estilo.reset);
-                    String cnh = scanner.nextLine();
-                    System.out.println(Estilo.negrito + Estilo.azul + "\n=== Veículos Disponíveis ===" + Estilo.reset);
-                    Veiculo.listarVeiculos(true);
-                    System.out.print(Estilo.negrito + Estilo.amarelo + "Placa do veículo: " + Estilo.reset);
-                    String placa = scanner.nextLine();
-                    System.out.print(Estilo.negrito + Estilo.amarelo + "Data de retirada (AAAA-MM-DD): " + Estilo.reset);
-                    LocalDate retirada = LocalDate.parse(scanner.nextLine());
-                    System.out.print(Estilo.negrito + Estilo.amarelo + "Data de devolução (AAAA-MM-DD): " + Estilo.reset);
-                    LocalDate devolucao = LocalDate.parse(scanner.nextLine());
-                    System.out.print(Estilo.negrito + Estilo.amarelo + "Valor: " + Estilo.reset);
-                    double valor = scanner.nextDouble();
-                    scanner.nextLine();
-                    Locacao.cadastrarLocacao(cnh, placa, retirada, devolucao, valor);
+                    try {
+                        System.out.print(Estilo.negrito + Estilo.amarelo + "\nCNH do cliente: " + Estilo.reset);
+                        String cnh = scanner.nextLine();
+                        System.out.println(Estilo.negrito + Estilo.azul + "\n=== Veículos Disponíveis ===" + Estilo.reset);
+                        Veiculo.listarVeiculos(true);
+                        System.out.print(Estilo.negrito + Estilo.amarelo + "Placa do veículo: " + Estilo.reset);
+                        String placa = scanner.nextLine();
+                        System.out.print(Estilo.negrito + Estilo.amarelo + "Data de retirada (AAAA-MM-DD): " + Estilo.reset);
+                        LocalDate retirada = LocalDate.parse(scanner.nextLine());
+                        System.out.print(Estilo.negrito + Estilo.amarelo + "Data de devolução (AAAA-MM-DD): " + Estilo.reset);
+                        LocalDate devolucao = LocalDate.parse(scanner.nextLine());
+                        System.out.print(Estilo.negrito + Estilo.amarelo + "Valor: " + Estilo.reset);
+                        double valor = scanner.nextDouble();
+                        scanner.nextLine();
+                        Locacao.cadastrarLocacao(cnh, placa, retirada, devolucao, valor);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Formato de data inválido. Use o padrão AAAA-MM-DD.");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Valor inválido. Use apenas números para o valor.");
+                    }
+                    
                     break;
                 case 2:
                     System.out.print(Estilo.negrito + Estilo.amarelo + "\nPlaca do veículo para devolução: " + Estilo.reset);
