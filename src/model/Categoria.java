@@ -91,12 +91,22 @@ public class Categoria {
 
     public static void removerCategoria(int identificador) {
         Categoria temp = new Categoria("", identificador);
+    
+        // Verifica se há veículos associados à categoria
+        for (Noh<Veiculo> noh = Veiculo.getListaVeiculos().getInicio(); noh != null; noh = noh.getProx()) {
+            if (noh.getInfo().getCategoria().getIdentificador() == identificador) {
+                System.out.println("Não é possível remover a categoria. Existem veículos associados a ela.");
+                return;
+            }
+        }
+    
+        // Remove a categoria se não houver veículos associados
         boolean removido = listaCategorias.remove(temp);
-
+    
         if (removido) {
             System.out.println("Categoria removida com sucesso!");
         } else {
             System.out.println("Categoria não encontrada. Não foi possível remover.");
         }
     }
-}
+} 
