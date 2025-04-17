@@ -1,6 +1,7 @@
 package src.model;
 import src.estrutura.LDE;
 import src.estrutura.Noh;
+import src.utils.Estilo;
 
 public class Categoria {
     private String nome;
@@ -95,7 +96,7 @@ public class Categoria {
         // Verifica se há veículos associados à categoria
         for (Noh<Veiculo> noh = Veiculo.getListaVeiculos().getInicio(); noh != null; noh = noh.getProx()) {
             if (noh.getInfo().getCategoria().getIdentificador() == identificador) {
-                System.out.println("Não é possível remover a categoria. Existem veículos associados a ela.");
+                System.out.println(Estilo.negrito + Estilo.vermelho + "Não é possível remover a categoria. Existem veículos associados a ela." + Estilo.reset);
                 return;
             }
         }
