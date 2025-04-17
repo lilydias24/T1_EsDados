@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import src.estrutura.LDE;
 import src.estrutura.Noh;
+import src.utils.Estilo;
 
 public class Locacao {
     private String cnhCliente;
@@ -85,38 +86,38 @@ public class Locacao {
     public static void cadastrarLocacao(String cnhCliente, String placaVeiculo, LocalDate dataRetirada, LocalDate dataDevolucao, double valor) {
         
         if (Cliente.buscarPorCNH(cnhCliente) == null) {
-            System.out.println("Cliente não encontrado!");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Cliente não encontrado!" + Estilo.reset);
             return;
         }
         
         if (Veiculo.buscarVeiculo(placaVeiculo) == null) {
-            System.out.println("Veículo não encontrado!");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Veículo não encontrado!" + Estilo.reset);
             return;
         }
 
         if (!veiculoDisponivel(placaVeiculo)) {
-            System.out.println("Veículo já está locado!");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Veículo já está locado!" + Estilo.reset);
             return;
         }
 
         if (dataRetirada.isAfter(dataDevolucao)) {
-            System.out.println("A data de retirada não pode ser posterior à data de devolução.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "A data de retirada não pode ser posterior à data de devolução." + Estilo.reset);
             return;
         }
     
         if (valor < 0) {
-            System.out.println("O valor da locação não pode ser negativo.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "O valor da locação não pode ser negativo." + Estilo.reset);
             return;
         }
         
         Locacao novaLocacao = new Locacao(cnhCliente, placaVeiculo, dataRetirada, dataDevolucao, valor);
         listaLocacoes.insereFim(novaLocacao);
-        System.out.println("Locação cadastrada com sucesso!");
+        System.out.println(Estilo.negrito + Estilo.verde + "Locação cadastrada com sucesso!" + Estilo.reset);
     }
 
     public static void listarLocacoes(boolean ordemNormal) {
         if (listaLocacoes.estahVazia()) {
-            System.out.println("Nenhuma locação cadastrada.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Nenhuma locação cadastrada." + Estilo.reset);
             return;
         }
 
@@ -138,9 +139,9 @@ public class Locacao {
         boolean removido = listaLocacoes.remove(temp);
 
         if (removido) {
-            System.out.println("Veículo devolvido com sucesso!");
+            System.out.println(Estilo.negrito + Estilo.verde + "Veículo devolvido com sucesso!" + Estilo.reset);
         } else {
-            System.out.println("Locação não encontrada.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Locação não encontrada." + Estilo.reset);
         }
     }
 

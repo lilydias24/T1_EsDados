@@ -95,17 +95,17 @@ public class Veiculo {
         Veiculo novo = new Veiculo(placa, modelo, marca, ano, potencia, lugares, categoria);
 
         if (listaVeiculos.buscar(novo) != null) {
-            System.out.println("Já existe veículo com esta placa.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Já existe veículo com esta placa." + Estilo.reset);
             return;
         }
 
         listaVeiculos.insereFim(novo);
-        System.out.println("Veículo cadastrado com sucesso.");
+        System.out.println(Estilo.negrito + Estilo.verde + "Veículo cadastrado com sucesso." + Estilo.reset);
     }
 
     public static void listarVeiculos(boolean ordemNormal) {
         if (listaVeiculos.estahVazia()) {
-            System.out.println("Nenhum veículo cadastrado.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Nenhum veículo cadastrado." + Estilo.reset);
             return;
         }
 
@@ -132,7 +132,7 @@ public class Veiculo {
         Noh<Veiculo> noh = listaVeiculos.buscar(temp);
 
         if (noh == null) {
-            System.out.println("Veículo não encontrado.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Veículo não encontrado." + Estilo.reset);
             return;
         }
 
@@ -144,7 +144,7 @@ public class Veiculo {
         v.setLugares(novosLugares);
         v.setCategoria(novaCategoria);
 
-        System.out.println("Dados do veículo atualizados.");
+        System.out.println(Estilo.negrito + Estilo.verde + "Dados do veículo atualizados." + Estilo.reset);
     }
 
     public static void removerVeiculo(String placa) {
@@ -161,15 +161,15 @@ public class Veiculo {
         boolean removido = listaVeiculos.remove(temp);
     
         if (removido) {
-            System.out.println("Veículo removido com sucesso!");
+            System.out.println(Estilo.negrito + Estilo.verde + "Veículo removido com sucesso!" + Estilo.reset);
         } else {
-            System.out.println("Veículo não encontrado.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Veículo não encontrado." + Estilo.reset);
         }
     }
 
     public static void filtrarVeiculos(Integer potenciaMinima, Integer lugares, String nomeCategoria) {
         if (listaVeiculos.estahVazia()) {
-            System.out.println("Nenhum veículo cadastrado.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Nenhum veículo cadastrado." + Estilo.reset);
             return;
         }
     

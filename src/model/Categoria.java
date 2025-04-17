@@ -49,12 +49,12 @@ public class Categoria {
             return;
         }
         listaCategorias.insereFim(novaCategoria);
-        System.out.println("Categoria cadastrada com sucesso!");
+        System.out.println(Estilo.negrito + Estilo.verde + "Categoria cadastrada com sucesso!" + Estilo.reset);
     }
 
     public static void listarCategorias(boolean ordemNormal) {
         if (listaCategorias.estahVazia()) {
-            System.out.println("Nenhuma categoria cadastrada. Não é possível listar.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Nenhuma categoria cadastrada. Não é possível listar." + Estilo.reset);
             return;
         }
 
@@ -81,13 +81,13 @@ public class Categoria {
         Noh<Categoria> noh = listaCategorias.buscar(temp);
 
         if (noh == null) {
-            System.out.println("Categoria não encontrada. Não foi possível editar.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Categoria não encontrada. Não foi possível editar." + Estilo.reset);
             return;
         }
 
         Categoria c = noh.getInfo();
         c.setNome(novoNome);
-        System.out.println("Categoria editada com sucesso!");
+        System.out.println(Estilo.negrito + Estilo.verde + "Categoria editada com sucesso!" + Estilo.reset);
     }
 
     public static void removerCategoria(int identificador) {
@@ -105,9 +105,9 @@ public class Categoria {
         boolean removido = listaCategorias.remove(temp);
     
         if (removido) {
-            System.out.println("Categoria removida com sucesso!");
+            System.out.println(Estilo.negrito + Estilo.verde + "Categoria removida com sucesso!" + Estilo.reset);
         } else {
-            System.out.println("Categoria não encontrada. Não foi possível remover.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Categoria não encontrada. Não foi possível remover." + Estilo.reset);
         }
     }
 } 

@@ -46,9 +46,9 @@ public class controllerLocacoes {
                         scanner.nextLine();
                         Locacao.cadastrarLocacao(cnh, placa, retirada, devolucao, valor);
                     } catch (DateTimeParseException e) {
-                        System.out.println("Formato de data inválido. Use o padrão AAAA-MM-DD.");
+                        System.out.println(Estilo.negrito + Estilo.vermelho + "Formato de data inválido. Use o padrão AAAA-MM-DD." + Estilo.reset);
                     } catch (NumberFormatException e) {
-                        System.out.println("Valor inválido. Use apenas números para o valor.");
+                        System.out.println(Estilo.negrito + Estilo.vermelho + "Valor inválido. Use apenas números para o valor." + Estilo.reset);
                     }
                     
                     break;

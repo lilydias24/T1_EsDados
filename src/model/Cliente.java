@@ -70,7 +70,7 @@ public class Cliente {
     public static void cadastrarCliente(String nome, String cnh, String telefone, String cpf) {
         Cliente novo = new Cliente(nome, cnh, telefone, cpf);
         if (listaClientes.buscar(novo) != null) {
-            System.out.println("Já existe um cliente com este CPF.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Já existe um cliente com este CPF." + Estilo.reset);
             return;
         }
         listaClientes.insereFim(novo);
@@ -79,7 +79,7 @@ public class Cliente {
 
     public static void listarClientes(boolean ordemNormal) {
         if (listaClientes.estahVazia()) {
-            System.out.println("Nenhum cliente cadastrado.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Nenhum cliente cadastrado." + Estilo.reset);
             return;
         }
 
@@ -106,7 +106,7 @@ public class Cliente {
         Noh<Cliente> noh = listaClientes.buscar(temp);
 
         if (noh == null) {
-            System.out.println("Cliente não encontrado.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Cliente não encontrado." + Estilo.reset);
             return;
         }
 
@@ -115,7 +115,7 @@ public class Cliente {
         c.setCNH(novaCNH);
         c.setTelefone(novoTelefone);
 
-        System.out.println("Dados do cliente atualizados.");
+        System.out.println(Estilo.negrito + Estilo.verde + "Dados do cliente atualizados." + Estilo.reset);
     }
 
     public static void removerCliente(String cpf) {
@@ -124,7 +124,7 @@ public class Cliente {
         Noh<Cliente> nohCliente = listaClientes.buscar(temp);
     
         if (nohCliente == null) {
-            System.out.println("Cliente não encontrado.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Cliente não encontrado." + Estilo.reset);
             return;
         }
     
@@ -142,9 +142,9 @@ public class Cliente {
         boolean removido = listaClientes.remove(temp);
     
         if (removido) {
-            System.out.println("Cliente removido com sucesso!");
+            System.out.println(Estilo.negrito + Estilo.verde + "Cliente removido com sucesso!" + Estilo.reset);
         } else {
-            System.out.println("Erro ao remover o cliente.");
+            System.out.println(Estilo.negrito + Estilo.vermelho + "Erro ao remover o cliente." + Estilo.reset);
         }
     }
 
