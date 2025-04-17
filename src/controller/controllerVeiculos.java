@@ -17,6 +17,7 @@ public class controllerVeiculos {
             System.out.println("\t 3. Editar Veículo");
             System.out.println("\t 4. Listar Veículos (Início -> Fim)");
             System.out.println("\t 5. Listar Veículos (Fim -> Início)");
+            System.out.println("\t 6. Filtrar Veículos");
             System.out.println("\t 0. <- Voltar" + Estilo.reset);
             System.out.println(Estilo.negrito + Estilo.azul + "\n<<<------------------------------------>>>\n" + Estilo.reset);
             System.out.print(Estilo.negrito + Estilo.amarelo + ">> Escolha uma das opções acima: " + Estilo.reset);
@@ -32,6 +33,7 @@ public class controllerVeiculos {
 
             switch (opcao) {
                 case 1:
+                    // Inserir veículo
                     System.out.print(Estilo.negrito + Estilo.amarelo + "\nPlaca: " + Estilo.reset);
                     String placa = scanner.nextLine();
                     System.out.print(Estilo.negrito + Estilo.amarelo + "Modelo: " + Estilo.reset);
@@ -57,11 +59,13 @@ public class controllerVeiculos {
                     }
                     break;
                 case 2:
+                    // Excluir veículo
                     System.out.print(Estilo.negrito + Estilo.amarelo + "\nPlaca do veículo a remover: " + Estilo.reset);
                     String placaRemover = scanner.nextLine();
                     Veiculo.removerVeiculo(placaRemover);
                     break;
                 case 3:
+                    // Editar veículo
                     System.out.print(Estilo.negrito + Estilo.amarelo + "\nPlaca do veículo a editar: " + Estilo.reset);
                     String placaEditar = scanner.nextLine();
                     System.out.print(Estilo.negrito + Estilo.amarelo + "Novo modelo: " + Estilo.reset);
@@ -87,12 +91,30 @@ public class controllerVeiculos {
                     }
                     break;
                 case 4:
+                    // Listar veículos (Início -> Fim)
                     System.out.println(Estilo.negrito + Estilo.azul + "\n=== Listando Veículos (Início -> Fim) ===" + Estilo.reset);
                     Veiculo.listarVeiculos(true);
                     break;
                 case 5:
+                    // Listar veículos (Fim -> Início)
                     System.out.println(Estilo.negrito + Estilo.azul + "\n=== Listando Veículos (Fim -> Início) ===" + Estilo.reset);
                     Veiculo.listarVeiculos(false);
+                    break;
+                case 6:
+                    // Filtrar veículos
+                    System.out.print(Estilo.negrito + Estilo.amarelo + "\nPotência mínima (ou pressione Enter para ignorar): " + Estilo.reset);
+                    String potenciaInput = scanner.nextLine();
+                    Integer potenciaMinima = potenciaInput.isEmpty() ? null : Integer.parseInt(potenciaInput);
+
+                    System.out.print(Estilo.negrito + Estilo.amarelo + "Número de lugares (ou pressione Enter para ignorar): " + Estilo.reset);
+                    String lugaresInput = scanner.nextLine();
+                    Integer lugares1 = lugaresInput.isEmpty() ? null : Integer.parseInt(lugaresInput);
+
+                    System.out.print(Estilo.negrito + Estilo.amarelo + "Nome da categoria (ou pressione Enter para ignorar): " + Estilo.reset);
+                    String nomeCategoria = scanner.nextLine();
+                    nomeCategoria = nomeCategoria.isEmpty() ? null : nomeCategoria;
+
+                    Veiculo.filtrarVeiculos(potenciaMinima, lugares1, nomeCategoria);
                     break;
                 case 0:
                     System.out.println(Estilo.negrito + Estilo.branco + "\nVoltando ao menu principal..." + Estilo.reset);

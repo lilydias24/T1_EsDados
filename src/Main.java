@@ -13,7 +13,7 @@ public class Main {
         int opcao = -1;
         ImportaCSV.importarDados();
         do {
-            System.out.println(Estilo.negrito + Estilo.azul + "\n<<<----------- LOCADORA DE VEÍCULOS ---------->> \n" + Estilo.reset);
+            System.out.println(Estilo.negrito + Estilo.azul + "\n<<<----------- LOCADORA DE VEÍCULOS ---------->> \n" );
             System.out.println(Estilo.roxo + "\t 1. Gerenciar Clientes");
             System.out.println("\n\t 2. Gerenciar Veículos");
             System.out.println("\n\t 3. Gerenciar Categorias");

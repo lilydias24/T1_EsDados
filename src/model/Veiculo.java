@@ -167,6 +167,33 @@ public class Veiculo {
         }
     }
 
+    public static void filtrarVeiculos(Integer potenciaMinima, Integer lugares, String nomeCategoria) {
+        if (listaVeiculos.estahVazia()) {
+            System.out.println("Nenhum veículo cadastrado.");
+            return;
+        }
+    
+        // System.out.println("==== Veículos Filtrados ====");
+        boolean encontrou = false;
+    
+        for (Noh<Veiculo> noh = listaVeiculos.getInicio(); noh != null; noh = noh.getProx()) {
+            Veiculo veiculo = noh.getInfo();
+    
+            boolean atendePotencia = (potenciaMinima == null || veiculo.getPotencia() >= potenciaMinima);
+            boolean atendeLugares = (lugares == null || veiculo.getLugares() == lugares);
+            boolean atendeCategoria = (nomeCategoria == null || veiculo.getCategoria().getNome().equalsIgnoreCase(nomeCategoria));
+    
+            if (atendePotencia && atendeLugares && atendeCategoria) {
+                System.out.println(veiculo);
+                encontrou = true;
+            }
+        }
+    
+        if (!encontrou) {
+            System.out.println("Nenhum veículo encontrado com os critérios especificados.");
+        }
+    }
+
     public static LDE<Veiculo> getListaVeiculos() {
         return listaVeiculos;
     }
