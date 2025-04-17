@@ -1,6 +1,7 @@
 package src.model;
 import src.estrutura.LDE;
 import src.estrutura.Noh;
+import src.utils.Estilo;
 
 public class Veiculo {
 
@@ -150,7 +151,7 @@ public class Veiculo {
         // Verifica se há locações associadas ao veículo
         for (Noh<Locacao> noh = Locacao.listaLocacoes.getInicio(); noh != null; noh = noh.getProx()) {
             if (noh.getInfo().getPlacaVeiculo().equals(placa)) {
-                System.out.println("Não é possível remover o veículo. Existem locações associadas a ele.");
+                System.out.println(Estilo.negrito + Estilo.vermelho + "Não é possível remover o veículo. Existem locações associadas a ele." + Estilo.reset);
                 return;
             }
         }

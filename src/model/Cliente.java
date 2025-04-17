@@ -1,6 +1,7 @@
 package src.model;
 import src.estrutura.LDE;
 import src.estrutura.Noh;
+import src.utils.Estilo;
 
 public class Cliente {
 
@@ -73,7 +74,7 @@ public class Cliente {
             return;
         }
         listaClientes.insereFim(novo);
-        System.out.println("Cliente cadastrado com sucesso!");
+        // System.out.println("Cliente cadastrado com sucesso!");
     }
 
     public static void listarClientes(boolean ordemNormal) {
@@ -132,7 +133,7 @@ public class Cliente {
         // Verifica se há locações associadas ao cliente
         for (Noh<Locacao> noh = Locacao.listaLocacoes.getInicio(); noh != null; noh = noh.getProx()) {
             if (noh.getInfo().getCnhCliente().equals(cliente.getCNH())) {
-                System.out.println("Não é possível remover o cliente. Existem locações associadas a ele.");
+                System.out.println(Estilo.negrito + Estilo.vermelho + "Não é possível remover o cliente. Existem locações associadas a ele." +  Estilo.reset);
                 return;
             }
         }
